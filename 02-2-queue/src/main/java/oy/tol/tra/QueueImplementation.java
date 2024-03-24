@@ -76,9 +76,6 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         head = 0;
         tail = 0;
     }
-    public String toString() {
-        return Arrays.toString(Arrays.copyOfRange(elements, head, head + size));
-    }
 
     private void resize() throws QueueAllocationException {
         int newCapacity = elements.length * 2;
@@ -88,6 +85,21 @@ public class QueueImplementation<E> implements QueueInterface<E> {
             throw new QueueAllocationException("Error");
         }
     }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = head; i < tail; i++) {
+            sb.append(elements[i]);
+            if (i < tail - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 }
+
+
 
 
