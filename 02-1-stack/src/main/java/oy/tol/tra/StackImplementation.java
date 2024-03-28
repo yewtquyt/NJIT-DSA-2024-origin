@@ -32,10 +32,29 @@ public class StackImplementation<E> implements StackInterface<E> {
 
    @Override
    public void push(E element) throws StackAllocationException, NullPointerException {
-      if (currentIndex == capacity - 1) {
-         throw new StackAllocationException("Stack is full");
+      if(element==null){
+         throw new NullPointerException("The element that need to push cannot be null");
       }
-      itemArray[++currentIndex] = element;
+      if(currentIndex+1>=capacity){
+         Object [] newArray;
+         int newCapacity=capacity*2;
+
+         try{
+            newArray=new Object [newCapacity];
+            for(int i=0; i<itemArray.length; i++){
+               newArray[i]=itemArray[i];
+            }
+
+            capacity=newCapacity;
+            itemArray=newArray;
+
+         }
+         catch(Exception e){
+            throw new StackAllocationException("Allocating room for the internal array is forbidden");
+         }
+      }
+      itemArray[++currentIndex]=element;
+
    }
 
    @Override
