@@ -44,7 +44,7 @@ public class Person implements Comparable<Person> {
         hash = hash * 31 + lastName.hashCode();
 
         // Implement hash function here.
-        return hash;
+        return Math.abs(hash);
     }
 
     @Override
