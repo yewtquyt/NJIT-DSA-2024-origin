@@ -6,6 +6,8 @@ public class QueueImplementation<E> implements QueueInterface<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private E[] itemArray;
     private int size;
+    private int head;
+    private int tail;
     private int capacity;
 
 
@@ -13,10 +15,15 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         this.capacity = capacity > 0 ? capacity : DEFAULT_CAPACITY;
         this.itemArray = (E[]) new Object[this.capacity];
         this.size = 0;
+        this.head = 0;
+        this.tail = 0;
     }
-    public QueueImplementation() {
+
+    public QueueImplementation() throws QueueAllocationException{
         this(DEFAULT_CAPACITY);
     }
+
+
     @Override
     public int capacity() {
         return capacity;
@@ -29,10 +36,25 @@ public class QueueImplementation<E> implements QueueInterface<E> {
             throw new NullPointerException("Element cannot be null");
         }
         if (size >= capacity) {
-            resize();
+            try{
+                int newCapacity = 2 * capacity;
+                E[] newitemArray = (E[]) new Object[newCapacity];
+                for (int i = 0; i < size; i++) {
+                    newitemArray[i] = itemArray[(head + i) % capacity];
+                }
+                itemArray = newitemArray;
+                head = 0;
+                tail = size;
+                capacity = newCapacity;
+            }catch (OutOfMemoryError e) {
+                throw new QueueAllocationException("Failed to allocate more room for the queue.");
+            }
         }
-        itemArray[size++] = element;
+        itemArray[tail] = element;
+        tail = (tail + 1) % capacity;
+        size++;
     }
+
 
 
     @Override
@@ -40,8 +62,10 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         if (isEmpty()) {
             throw new QueueIsEmptyException("Queue is empty");
         }
-        E element = itemArray[0];
-        System.arraycopy(itemArray, 1, itemArray, 0, --size);
+        E element = itemArray[head];
+        itemArray[head] = null;
+        head = (head + 1) % capacity;
+        size--;
         return element;
     }
 
@@ -50,14 +74,13 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         if (isEmpty()) {
             throw new QueueIsEmptyException("Queue is empty");
         }
-        return itemArray[0];
+        return (E)itemArray[head];
     }
 
     @Override
     public int size() {
         return size;
     }
-
     @Override
     public boolean isEmpty() {
         return size == 0;
@@ -65,28 +88,25 @@ public class QueueImplementation<E> implements QueueInterface<E> {
 
     @Override
     public void clear() {
-        Arrays.fill(itemArray, null);
-        size = 0;
-    }
-
-    private void resize()  throws QueueAllocationException {
-        capacity *= 2;
-        E[] newArray = (E[]) new Object[capacity];
-        System.arraycopy(itemArray, 0, newArray, 0, size);
-        itemArray = newArray;
+        for (int i = 0; i < size; i++) {
+            itemArray[(head + i) % capacity] = null;
+        }
+        this.head = 0;
+        this.tail = 0;
+        this.size = 0;
     }
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
+        StringBuilder Bu = new StringBuilder();
+        Bu.append("[");
         for (int i = 0; i < size; i++) {
-            sb.append(itemArray[i]);
+            Bu.append(itemArray[(head + i) % capacity].toString());
             if (i < size - 1) {
-                sb.append(", ");
+                Bu.append(", ");
             }
         }
-        sb.append("]");
-        return sb.toString();
+        Bu.append("]");
+        return Bu.toString();
     }
 }
 
