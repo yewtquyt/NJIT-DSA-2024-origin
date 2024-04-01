@@ -45,7 +45,7 @@ import org.junit.jupiter.api.Order;
     @BeforeAll
     @Timeout(value = 10, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
     @DisplayName("Initializing the test data and queue object to test.")
-    static void initializeQueueImplementation() {
+    static void initi alizeQueueImplementation() {
         System.out.println("Testing creating queue.");
         randomizer = new Random();
         int queueSize = Math.max(2, randomizer.nextInt(100));
