@@ -40,9 +40,15 @@ public class Algorithms {
     }
     public static <T extends Comparable<T>> void fastSort(T[] fromArray, int fromIndex, int toIndex) {
         if (fromIndex < toIndex) {
+            quickSort(fromArray, fromIndex, toIndex);
+        }
+    }
+
+    private static <T extends Comparable<T>> void quickSort(T[] fromArray, int fromIndex, int toIndex) {
+        if (fromIndex < toIndex) {
             int pivotIndex = partition(fromArray, fromIndex, toIndex);
-            fastSort(fromArray, fromIndex, pivotIndex - 1);
-            fastSort(fromArray, pivotIndex + 1, toIndex);
+            quickSort(fromArray, fromIndex, pivotIndex - 1);
+            quickSort(fromArray, pivotIndex + 1, toIndex);
         }
     }
 
