@@ -75,11 +75,11 @@ public class Algorithms {
         array[j] = temp;
     }
 
-    public static void sort(Integer[] array) {
-        fastSort(array, 0, array.length - 1);
-    }
+   // public static void sort(T[] array) {
+      //  fastSort(array, 0, array.length - 1);
+   // }
 
-    public static void sort(String[] array) {
-        fastSort(array, 0, array.length - 1);
-    }
+   // public static void sort(String[] array) {
+        //fastSort(array, 0, array.length - 1);
+  //  }
 }
