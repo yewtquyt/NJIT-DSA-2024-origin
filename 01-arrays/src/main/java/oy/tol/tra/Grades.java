@@ -44,7 +44,7 @@ public class Grades {
    /**
     * Sorts the array to ascending order.
     */
-   public void sort() {
+   public void sort () {
       /* TODO:
        1. Edit the test data files to see if the sort() really works or not.
        2. Execute the IntArrayTests to see that some of them fail.
