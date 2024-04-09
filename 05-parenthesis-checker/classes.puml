@@ -28,9 +28,9 @@ package oy.tol.tra {
     Implement this in  in TASK-2.
   end note
   class StackImplementation #pink;line:red
-  note right of StackImplementation
+  note right of StackImplementation 
     Implement this first before TASK-2.md.
-  end note
+  end note 
   StackFactory ..> StackImplementation : instantiates
   ParenthesisChecker ..> StackImplementation : uses
   StackIsEmptyException --|> java.lang.Exception

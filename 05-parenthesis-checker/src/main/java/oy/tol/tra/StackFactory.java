@@ -24,11 +24,12 @@ public class StackFactory {
 
     /**
      * Creates an instance of StackImplementation for Integer type.
+     *
      * @param capacity Number of elements the stack can hold.
      * @return The stack object.
      */
-    public static StackInterface<Character> createIntegerStack(int capacity) {
-        return new StackImplementation<Character>(capacity);
+    public static StackInterface<Integer> createIntegerStack(int capacity) {
+        return new StackImplementation<>(capacity);
     }
 
     /**

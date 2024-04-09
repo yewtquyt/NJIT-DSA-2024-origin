@@ -27,7 +27,7 @@ import org.junit.jupiter.api.DisplayName;
 
 /**
  * Unit tests for testing the stack implementation.
- *
+ * 
  * DO NOT change anything here, just implement the StackInterface, instantiate it in
  * StackBuilder.createIntegerStack and perform the tests.
  */
@@ -235,7 +235,7 @@ public class StackTests {
 
     /**
      * Utility method to create a list with random test data.
-     *
+     * 
      * @param itemCount Number of items to put into the testa data list.
      * @return A list of test data to use with the test stack.
      */
